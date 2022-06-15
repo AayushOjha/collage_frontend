@@ -18,3 +18,8 @@ code {
   margin: 0 auto;
   padding: 20px 0;
 }
+
+.link-text {
+  color: rgb(31, 95, 180);
+  font-weight: bold;
+}

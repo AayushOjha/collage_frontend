@@ -9,8 +9,8 @@ export default function QuickLink() {
 
           <ul className="list-unstyled mb-0">
             <li>
-              <a href="#!" className="text-dark">
-                Link 1
+              <a href="#!" className="link-text">
+                Link loda
               </a>
             </li>
             <li>
