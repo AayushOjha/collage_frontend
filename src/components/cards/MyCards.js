@@ -4,7 +4,6 @@ import Row from 'react-bootstrap/Row';
 import HeaderComp from '../header-layout/HeaderComp';
 
 function GridExample({ data }) {
-  console.log(data);
   return (
     <>
       {data.Header ? <HeaderComp data={data.Header} /> : null}

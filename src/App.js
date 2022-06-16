@@ -6,6 +6,7 @@ import { BallTriangle } from 'react-loader-spinner';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import ContentRenderer from './components/ContentRenderer';
+import SubPage from './components/SubPage';
 
 export default function App() {
   const domain = window.location.hostname;
@@ -14,6 +15,8 @@ export default function App() {
   const [pageContent, setpageContent] = useState(null);
   const [navData, setnavData] = useState(null);
   const [footData, setfootData] = useState(null);
+  const [subPageList, setsubPageList] = useState(null);
+  var websiteId;
 
   useEffect(() => {
     getWebsiteId(domain);
@@ -30,6 +33,7 @@ export default function App() {
         } else {
           let id = response.data.data[0].id;
           getHomePage(id);
+          websiteId = id;
         }
       })
       .catch((error) => {
@@ -147,6 +151,14 @@ export default function App() {
                   }
                   CopyRight_Text
                 }
+                sub_pages{
+                  data{
+                    id
+                    attributes{
+                      Route
+                    }
+                  }
+                }
               }
             }
           }
@@ -161,6 +173,9 @@ export default function App() {
         );
         setnavData(response.data.data.website.data.attributes.NavBar);
         setfootData(response.data.data.website.data.attributes.Footer);
+        setsubPageList(
+          response.data.data.website.data.attributes.sub_pages.data
+        );
         setloading(false);
       })
       .catch((error) => {
@@ -186,7 +201,11 @@ export default function App() {
         <Nav data={navData} />
         <Routes>
           <Route path="/" element={<ContentRenderer data={pageContent} />} />
-          <Route path="/sl" element={<ContentRenderer />} />
+          <Route
+            path="/:routeName"
+            exact
+            element={<SubPage list={subPageList} />}
+          />
         </Routes>
         <Footer data={footData} />
       </BrowserRouter>
