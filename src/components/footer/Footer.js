@@ -1,7 +1,6 @@
 import linkGenerator from '../linkGenerator';
 
 export default function Footer({ data }) {
-  console.log(data);
   return (
     <footer className="bg-dark text-center text-lg-start">
       <div

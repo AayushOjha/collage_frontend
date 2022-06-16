@@ -1,14 +1,18 @@
-export default function Img({ height, source }) {
+import HeaderComp from '../header-layout/HeaderComp';
+export default function Img({ data }) {
   return (
-    <img
-      src={source}
-      style={{
-        width: '100%',
-        height: `${height}`,
-        borderRadius: '20px',
-        objectFit: 'cover',
-      }}
-      alt="alt text"
-    />
+    <>
+      {data.Header ? <HeaderComp data={data.Header} /> : null}
+      <img
+        src={process.env.REACT_APP_BASE + data.Image.data.attributes.url}
+        style={{
+          width: '100%',
+          height: `${data.Height}px`,
+          borderRadius: '20px',
+          objectFit: 'cover',
+        }}
+        alt="alt text"
+      />
+    </>
   );
 }

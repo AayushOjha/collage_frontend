@@ -7,7 +7,7 @@ function ColorSchemesExample({ data }) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">{data.Brand_Name}</Navbar.Brand>
+        <Navbar.Brand>{data.Brand_Name}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse
           className="justify-content-end"

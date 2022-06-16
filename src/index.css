@@ -31,3 +31,7 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+.componentCointainer {
+  padding: 20px 0;
+}

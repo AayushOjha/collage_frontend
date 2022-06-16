@@ -1,18 +1,11 @@
 import { useState, useEffect } from 'react';
-import Img from './components/image/Image';
 import Nav from './components/nav/Nav';
-import Slider from './components/slider/Slider';
-import Acc from './components/accordian/Acc';
 import Footer from './components/footer/Footer';
-import QuickLink from './components/quickLink/QuickLink';
-import MyCards from './components/cards/MyCards';
-import HeaderComp from './components/header-layout/HeaderComp';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { BallTriangle } from 'react-loader-spinner';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import ContentRenderer from './components/ContentRenderer';
-import { logDOM } from '@testing-library/react';
 
 export default function App() {
   const domain = window.location.hostname;
@@ -130,6 +123,10 @@ export default function App() {
                         }
                         ... on ComponentGeneralSimpleImage {
                           __typename
+                          Header{
+                            Heading
+                            Description
+                          }
                           Height
                           Image {
                             data {
