@@ -3,7 +3,6 @@ import HeaderComp from '../header-layout/HeaderComp';
 import linkGenerator from '../linkGenerator';
 
 export default function QuickLink({ data }) {
-  console.log(data);
   return (
     <>
       {data.Header ? <HeaderComp data={data.Header} /> : null}

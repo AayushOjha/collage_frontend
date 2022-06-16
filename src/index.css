@@ -35,3 +35,8 @@ code {
 .componentCointainer {
   padding: 20px 0;
 }
+
+.CardImage {
+  height: 300px;
+  object-fit: cover;
+}
