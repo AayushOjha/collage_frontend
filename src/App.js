@@ -9,12 +9,18 @@ import MyCards from './components/cards/MyCards';
 import HeaderComp from './components/header-layout/HeaderComp';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { BallTriangle } from 'react-loader-spinner';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import ContentRenderer from './components/ContentRenderer';
+import { logDOM } from '@testing-library/react';
 
 export default function App() {
   const domain = window.location.hostname;
   const [loading, setloading] = useState(true);
   const [errorFlag, setErrorFlag] = useState(null);
+  const [pageContent, setpageContent] = useState(null);
+  const [navData, setnavData] = useState(null);
+  const [footData, setfootData] = useState(null);
 
   useEffect(() => {
     getWebsiteId(domain);
@@ -49,7 +55,13 @@ export default function App() {
           website(id:${id}) {
             data {
               attributes {
-                domain
+                NavBar{
+                  Brand_Name
+                  Nav_Items{
+                    Name
+                    Link
+                  }
+                }
                 home_page {
                   data {
                     attributes {
@@ -131,6 +143,13 @@ export default function App() {
                     }
                   }
                 }
+                Footer{
+                  Brand_Link{
+                    Name
+                    Link
+                  }
+                  CopyRight_Text
+                }
               }
             }
           }
@@ -139,7 +158,13 @@ export default function App() {
       },
     })
       .then((response) => {
-        console.log(response.data);
+        setpageContent(
+          response.data.data.website.data.attributes.home_page.data.attributes
+            .Page_Content
+        );
+        setnavData(response.data.data.website.data.attributes.NavBar);
+        setfootData(response.data.data.website.data.attributes.Footer);
+        setloading(false);
       })
       .catch((error) => {
         console.log(error.message);
@@ -160,30 +185,14 @@ export default function App() {
     );
   } else {
     return (
-      <div>
-        {
-          //   <Nav />
-          //   <br />
-          //   <div className="my-container">
-          //     <Img
-          //       height="500px"
-          //       source="https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1575&q=80"
-          //     />
-          //     <br />
-          //     <br />
-          //     <Slider />
-          //     <br />
-          //     <Acc />
-          //     <br />
-          //     <QuickLink />
-          //     <br />
-          //     <HeaderComp />
-          //     <MyCards />
-          //   </div>
-          //   <br />
-          //   <Footer />
-        }
-      </div>
+      <BrowserRouter>
+        <Nav data={navData} />
+        <Routes>
+          <Route path="/" element={<ContentRenderer data={pageContent} />} />
+          <Route path="/sl" element={<ContentRenderer />} />
+        </Routes>
+        <Footer data={footData} />
+      </BrowserRouter>
     );
   }
 }
