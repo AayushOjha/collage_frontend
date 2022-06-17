@@ -1,5 +1,6 @@
 import Accordion from 'react-bootstrap/Accordion';
 import HeaderComp from '../header-layout/HeaderComp';
+import ReactMarkdown from 'react-markdown';
 
 function AllCollapseExample({ data }) {
   return (
@@ -10,7 +11,9 @@ function AllCollapseExample({ data }) {
           return (
             <Accordion.Item eventKey={index} key={index}>
               <Accordion.Header>{item.Heading}</Accordion.Header>
-              <Accordion.Body>{item.Description}</Accordion.Body>
+              <Accordion.Body>
+                <ReactMarkdown>{item.Description}</ReactMarkdown>
+              </Accordion.Body>
             </Accordion.Item>
           );
         })}
